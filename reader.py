@@ -3,7 +3,7 @@ class file:
         self.file = file
         self.parseFile()
 
-    def parseFile(self): ## parses the file ones again, refreshing the self.final_work_list, to the latest version to work with.
+    def parseFile(self): ## parses the file again, also used to refresh the self.final_work_list so methods get the latest list/file.
         self.primary_line_split = []
         with open(self.file, "r+") as file:
             for line in file:
