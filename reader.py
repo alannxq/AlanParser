@@ -1,40 +1,7 @@
-## example "test.alan" file to show what methods would return:
-
-# name = alan , age = 01
-# city = space , country = asia
-
 class file:
     def __init__(self, file):
         self.file = file
-        self.primary_line_split = []
-        with open(self.file, "r+") as file:
-            for line in file:
-                single_line_stripped_space = line.rstrip("\n")
-                self.primary_line_split.append(single_line_stripped_space.split(","))
-
-        self.final_work_list = []
-        for line in self.primary_line_split:
-            temp_split_one_line = []
-
-            for statement in line:
-                single_statement_split = statement.split(" = ")
-                single_statement_removed_space_temp = []
-
-                for i in single_statement_split:
-                    despace_temp_word = i
-                    try:
-                        if despace_temp_word[-1] == " ":
-                            despace_temp_word = despace_temp_word[:-1]
-                        if despace_temp_word[0] == " ":
-                            despace_temp_word = despace_temp_word[1:]
-                    except:
-                        pass
-                    #print(f"i in single split statement: {i}")
-                    single_statement_removed_space_temp.append(despace_temp_word)
-
-                #print("single statement:",single_statement_removed_space_temp)
-                temp_split_one_line.append(single_statement_removed_space_temp)
-            self.final_work_list.append(temp_split_one_line)
+        self.parseFile()
 
 
 
@@ -132,7 +99,8 @@ class file:
         return "null" if len(temp_return) == 0 else final_return
 
     def addEntry(self, key=None, value=None): ## doesnt append, takes the current parsed list and converts it back into a file, overwrites the whole file
-        added_line = f"{key} = {value}"        
+        added_line = f"{key} = {value}"
+        self.parseFile()
         
         with open(self.file, "w+") as f:
             pretty_print_in_list_return = []
