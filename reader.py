@@ -1,9 +1,7 @@
-## writing will change the contents of a file
-## using a method changes the initial list that has been parsed, which is a problem
-## once the list has been updated and over-written
+## example "test.alan" file to show what methods would return:
 
-## TODO: write a method that re-parses the file (like __init__) and run it at the beginning
-## of every method, to make sure that the parsed file (list) is current.
+# name = alan , age = 01
+# city = space , country = asia
 
 class file:
     def __init__(self, file):
@@ -40,7 +38,7 @@ class file:
 
 
 
-    def parseFile(self):
+    def parseFile(self): ## parses the file ones again, refreshing the self.final_work_list, to the latest version to work with.
         self.primary_line_split = []
         with open(self.file, "r+") as file:
             for line in file:
@@ -71,7 +69,7 @@ class file:
                 temp_split_one_line.append(single_statement_removed_space_temp)
             self.final_work_list.append(temp_split_one_line)
 
-    def showRaw(self):
+    def showRaw(self): ## returns the file as a list, how it is used internally
         self.parseFile()
         return self.final_work_list
 
@@ -89,7 +87,7 @@ class file:
                 final_return.append(second_bracket[0])
         return "null" if len(temp_return) == 0 else final_return
 
-    def lineFromKey(self, key): ## if value exists in a line, return the entire lineForKey
+    def lineFromKey(self, key): ## if key exists in a line, return the entire line
         self.parseFile()
         temp_return = []
         for line in self.final_work_list:
@@ -107,7 +105,7 @@ class file:
 
         return "null" if len(temp_return) == 0 else final_return
 
-    def keyFromValue(self, value):
+    def keyFromValue(self, value): ## return all keys that match the value 
         self.parseFile()
         temp_return = []
         for line in self.final_work_list:
@@ -120,7 +118,7 @@ class file:
             final_return.append(first_bracket[0])
         return "null" if len(temp_return) == 0 else final_return
 
-    def valueFromKey(self, key):
+    def valueFromKey(self, key): ## return all values that match the key
         self.parseFile()
         temp_return = []
         for line in self.final_work_list:
@@ -133,7 +131,7 @@ class file:
             final_return.append(first_bracket[1]) ## for the statements matches, append the value
         return "null" if len(temp_return) == 0 else final_return
 
-    def addEntry(self, key=None, value=None): ## i think i will have to overwrite the whole file with the final_list var 
+    def addEntry(self, key=None, value=None): ## doesnt append, takes the current parsed list and converts it back into a file, overwrites the whole file
         added_line = f"{key} = {value}"        
         
         with open(self.file, "w+") as f:
