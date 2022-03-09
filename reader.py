@@ -38,7 +38,7 @@ class file:
         self.parseFile()
         return self.final_work_list
 
-    def lineFromValue(self, value): ## if value exists in a line, return the entire line 
+    def lineFromValue(self, value: str) -> list: ## if value exists in a line, return the entire line 
         self.parseFile()
         temp_return = []
         for line in self.final_work_list:
@@ -52,7 +52,7 @@ class file:
                 final_return.append(second_bracket[0])
         return "null" if len(temp_return) == 0 else final_return
 
-    def lineFromKey(self, key): ## if key exists in a line, return the entire line
+    def lineFromKey(self, key: str) -> list: ## if key exists in a line, return the entire line
         self.parseFile()
         temp_return = []
         for line in self.final_work_list:
@@ -70,7 +70,7 @@ class file:
 
         return "null" if len(temp_return) == 0 else final_return
 
-    def keyFromValue(self, value): ## return all keys that match the value 
+    def keyFromValue(self, value: str) -> list: ## return all keys that match the value 
         self.parseFile()
         temp_return = []
         for line in self.final_work_list:
@@ -83,7 +83,7 @@ class file:
             final_return.append(first_bracket[0])
         return "null" if len(temp_return) == 0 else final_return
 
-    def valueFromKey(self, key): ## return all values that match the key
+    def valueFromKey(self, key: str) -> list: ## return all values that match the key
         self.parseFile()
         temp_return = []
         for line in self.final_work_list:
@@ -119,10 +119,14 @@ class file:
                 pretty_print_return.append(''.join(line))
         
             pretty_print_return.append(added_line) ## WE ADD USER KEY/VAL HERE
+            
+            try:
+                f.write('\n'.join(pretty_print_return))
+                return "Written to file succesfully."
+           except:
+                return "Failed to add an entry."
 
-            f.write('\n'.join(pretty_print_return))
-
-    def prettyPrint(self): ## returns a list that can be easily printed with '\n'.join()
+    def prettyPrint(self) -> list: ## returns a list that can be easily printed with '\n'.join()
         self.parseFile()
         pretty_print_in_list_return = []
         for line in self.final_work_list:
